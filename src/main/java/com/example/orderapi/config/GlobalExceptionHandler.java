@@ -1,6 +1,8 @@
 package com.example.orderapi.config;
 
 import com.example.orderapi.dto.ErrorResponse;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,9 +17,21 @@ public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    private final Counter errorsTotal;
+
+    public GlobalExceptionHandler(MeterRegistry registry) {
+        // 2. Error rate
+        this.errorsTotal = Counter.builder("order_errors_total")
+                .description("Total number of failed order requests")
+                .tag("method", "GET")
+                .tag("endpoint", "/api/orders")
+                .register(registry);
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex) {
         log.error("Unhandled exception caught by GlobalExceptionHandler: {}", ex.getMessage(), ex);
+        errorsTotal.increment();
         ErrorResponse error = new ErrorResponse(
                 "ERROR",
                 ex.getMessage(),

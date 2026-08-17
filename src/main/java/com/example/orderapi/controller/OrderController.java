@@ -2,28 +2,47 @@ package com.example.orderapi.controller;
 
 import com.example.orderapi.dto.OrderResponse;
 import com.example.orderapi.service.OrderService;
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 public class OrderController {
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
+    private static final String ENDPOINT = "/api/orders";
+    private static final String METHOD = "GET";
 
     private final OrderService orderService;
+    private final Counter requestsTotal;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, MeterRegistry registry) {
         this.orderService = orderService;
+
+        // 3. Request volume
+        this.requestsTotal = Counter.builder("order_requests_total")
+                .description("Total number of order requests received")
+                .tag("method", METHOD)
+                .tag("endpoint", ENDPOINT)
+                .register(registry);
     }
 
     @GetMapping("/api/orders")
+    @Timed(
+            value = "order_request_latency_seconds",
+            description = "Time taken to process order requests",
+            histogram = true
+    )
     public ResponseEntity<OrderResponse> getOrder(
             @RequestParam(name = "fail", defaultValue = "false") boolean fail) {
         log.info("Received request GET /api/orders [fail={}]", fail);
+        requestsTotal.increment();
+
         OrderResponse response = orderService.processOrder(fail);
         return ResponseEntity.ok(response);
     }

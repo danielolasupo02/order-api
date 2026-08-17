@@ -18,7 +18,7 @@
     <description>Order API demo for Kubernetes + Prometheus + Grafana portfolio</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
