@@ -1,3 +1,4 @@
+com\example\orderapi\config\MetricsConfig.class
 com\example\orderapi\config\GlobalExceptionHandler.class
 com\example\orderapi\OrderApiApplication.class
 com\example\orderapi\dto\OrderResponse.class

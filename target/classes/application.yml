@@ -9,7 +9,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,prometheus
+        include: health,info,prometheus
   endpoint:
     health:
       show-details: always
@@ -23,6 +23,18 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        order.request.latency.seconds: true  # Use this naming convention
+        http.server.requests: true
+        order.api.requests: true
+      percentiles:
+        order.request.latency.seconds: 0.5, 0.95, 0.99
+        order.api.requests: 0.5, 0.95, 0.99
+      minimum-expected-value:
+        order.request.latency.seconds: 10ms
+      maximum-expected-value:
+        order.request.latency.seconds: 2s
 
 logging:
   level:
