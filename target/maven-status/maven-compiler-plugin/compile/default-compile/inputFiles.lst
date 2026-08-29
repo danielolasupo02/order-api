@@ -1,5 +1,7 @@
 C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\config\GlobalExceptionHandler.java
+C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\config\HttpMetricsConfig.java
 C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\config\MetricsConfig.java
+C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\config\ObservationConfig.java
 C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\controller\OrderController.java
 C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\dto\ErrorResponse.java
 C:\Users\USER\Documents\PersonalDevelopment\Tech\Projects\k8s-monitoring\order-api\src\main\java\com\example\orderapi\dto\OrderResponse.java

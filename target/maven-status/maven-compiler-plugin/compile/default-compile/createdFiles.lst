@@ -1,7 +1,9 @@
 com\example\orderapi\config\MetricsConfig.class
 com\example\orderapi\config\GlobalExceptionHandler.class
 com\example\orderapi\OrderApiApplication.class
+com\example\orderapi\config\HttpMetricsConfig.class
 com\example\orderapi\dto\OrderResponse.class
 com\example\orderapi\dto\ErrorResponse.class
 com\example\orderapi\service\OrderService.class
+com\example\orderapi\config\ObservationConfig.class
 com\example\orderapi\controller\OrderController.class
