@@ -9,9 +9,10 @@ public class HttpMetricsConfig {
 
     @Bean
     public MeterFilter httpMetricsFilter() {
+        // Allow all metrics that start with http.server.requests OR order_
         return MeterFilter.deny(id ->
                 !id.getName().startsWith("http.server.requests") &&
-                        !id.getName().startsWith("order_request_latency")
+                        !id.getName().startsWith("order_")
         );
     }
 }
